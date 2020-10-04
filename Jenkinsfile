@@ -21,13 +21,14 @@ pipeline{
                   --image-tag-mutability MUTABLE \
                   --region ${AWS_REGION}
                 """
-
             }
         }
 
-        stage('Build App Docker Images'){
+        stage('Build App Docker Image'){
             steps {
-                echo 'Building app Docker images'
+                echo 'Building app Docker image'
+                sh 'docker build --force-rm -t "${ECR_REGISTRY}/${APP_REPO_NAME}:latest" .'
+                sh 'docker image ls'
             }
         }
 
